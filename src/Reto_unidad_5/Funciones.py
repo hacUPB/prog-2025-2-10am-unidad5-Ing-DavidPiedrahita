@@ -42,11 +42,12 @@ def histograma():
     ruta = "./src/Reto_unidad_5/Archivos_reto5/" + nombre_archivo
     with open(ruta, "r", encoding="utf-8") as archivo:
         contenido = archivo.read().lower()
+#    vocales = ["a","e","i","o","u"]
     vocales = []
     for i in contenido: 
         if i in "aeiou":
             vocales.append(i)
-    plt.hist(vocales, bins=5, edgecolor='black', color='skyblue')
+    plt.hist(vocales, bins=100, edgecolor='black', color='skyblue')
     plt.title("Histograma de ocurrencias de vocales")
     plt.xlabel("Vocales")
     plt.ylabel("Frecuencia")
