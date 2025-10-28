@@ -1,11 +1,21 @@
+import os
+import csv
+import matplotlib.pyplot as plt
 def listado():
-    print()
+    ruta = input("Ingrese la ruta donde desea buscar los archivos:\n")
+    if ruta == "":
+        ruta = os.getcwd()
+    archivos = os.listdir(ruta)
+    print("\nArchivos encontrados:")
+    for archivo in archivos:
+        print(f"- {archivo}")
 
 
 def conteo():
-    nombre_archivo = input("ingrese el nombre del archivo a procesar (ingresar el nombre y su extensión): ")
+    nombre_archivo = input("Ingrese el nombre del archivo de texto: ")
+    ruta = "./src/Reto_unidad_5/Archivos_reto5/" + nombre_archivo
     print ("Contando número de palabras y caracteres...\n...")
-    with open("./src/Reto_unidad_5/Archivos_reto5/texto1.txt/" , "r", encoding="utf-8") as archivo:
+    with open(ruta, "r", encoding="utf-8") as archivo:
         contenido = archivo.read()
     num_caracteres = len(contenido)
     palabras = contenido.split()
@@ -15,10 +25,33 @@ def conteo():
 
 
 def reemplazo():
-    print()
+    nombre_archivo = input("Ingrese el nombre del archivo de texto: ")
+    palabra_original = input("Ingrese la palabra que desea reemplazar: ")
+    palabra_nueva = input("Ingrese la nueva palabra: ")
+    ruta = "./src/Reto_unidad_5/Archivos_reto5/" + nombre_archivo
+    with open(ruta, "r", encoding="utf-8") as archivo:
+         contenido = archivo.read()
+    nuevo_contenido = contenido.replace(palabra_original, palabra_nueva)
+    with open(ruta, "w", encoding="utf-8") as archivo:
+        archivo.write(nuevo_contenido)
+    print("Reemplazo realizado con éxito.")
+
 
 def histograma():
-    print()
+    nombre_archivo = input("Ingrese el nombre del archivo de texto: ")
+    ruta = "./src/Reto_unidad_5/Archivos_reto5/" + nombre_archivo
+    with open(ruta, "r", encoding="utf-8") as archivo:
+        contenido = archivo.read().lower()
+    vocales = []
+    for i in contenido: 
+        if i in "aeiou":
+            vocales.append(i)
+    plt.hist(vocales, bins=5, edgecolor='black', color='skyblue')
+    plt.title("Histograma de ocurrencias de vocales")
+    plt.xlabel("Vocales")
+    plt.ylabel("Frecuencia")
+    plt.show()
+
 
 def vista_previa():
     print()
@@ -30,7 +63,7 @@ def grafica():
     print()
 
 def OP1():
-    print ("Estos son los archivos que tiene disponible para trabajar:")
+    print ("A continuación podrá observar los archivos que tiene disponible para trabajar:")
     listado()
 
 

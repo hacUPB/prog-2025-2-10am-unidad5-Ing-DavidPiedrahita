@@ -1,4 +1,6 @@
+import os
 import csv
+import matplotlib.pyplot as plt
 from Funciones import *
 
 def main():

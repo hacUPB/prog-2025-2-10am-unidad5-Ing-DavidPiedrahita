@@ -2,8 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # Datos
-data = np.random.randn(1000)
-
+data = ["a","e","a","i","u","o","e","a","i","u","o","a","e","e","i"]
 # Crear el histograma
 plt.hist(data, bins=15, edgecolor='black')
 
