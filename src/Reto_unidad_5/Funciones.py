@@ -5,7 +5,7 @@ def listado():
 def conteo():
     nombre_archivo = input("ingrese el nombre del archivo a procesar (ingresar el nombre y su extensión): ")
     print ("Contando número de palabras y caracteres...\n...")
-    with open(".\\src\\Reto_unidad_5\\Archivos_reto5\\" + nombre_archivo , "r", encoding="utf-8") as archivo:
+    with open("./src/Reto_unidad_5/Archivos_reto5/texto1.txt/" , "r", encoding="utf-8") as archivo:
         contenido = archivo.read()
     num_caracteres = len(contenido)
     palabras = contenido.split()
