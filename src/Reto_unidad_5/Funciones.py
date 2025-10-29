@@ -2,7 +2,7 @@ import os
 import csv
 import matplotlib.pyplot as plt
 def listado():
-    ruta = input("Ingrese la ruta donde desea buscar los archivos:\n")
+    ruta = "./src/Reto_unidad_5/Archivos_reto5/"
     if ruta == "":
         ruta = os.getcwd()
     archivos = os.listdir(ruta)
@@ -47,7 +47,7 @@ def histograma():
     for i in contenido: 
         if i in "aeiou":
             vocales.append(i)
-    plt.hist(vocales, bins=100, edgecolor='black', color='skyblue')
+    plt.hist(vocales, bins=15, edgecolor='black')
     plt.title("Histograma de ocurrencias de vocales")
     plt.xlabel("Vocales")
     plt.ylabel("Frecuencia")
@@ -55,13 +55,83 @@ def histograma():
 
 
 def vista_previa():
-    print()
+    nombre_archivo = input("Ingrese el nombre del archivo csv: ")
+    ruta = "./src/Reto_unidad_5/Archivos_reto5/" + nombre_archivo
+    with open(ruta, "r", encoding='latin-1') as archivo:
+        lector = csv.reader(archivo)
+        contador = 0
+        for fila in lector:
+            print(fila)
+            contador += 1
+            if contador == 15:
+                break
+    
 
 def estadisticas():
-    print()
+    nombre_archivo = input("Ingrese el nombre del archivo csv: ")
+    delimitador = input("¿Su archivo está delimitado por "","" ó "";""? Anote su respuesta: ")    
+    columna = input("Ingrese el nombre de la columna a analizar: ")
+    ruta = "./src/Reto_unidad_5/Archivos_reto5/" + nombre_archivo
+    with open(ruta, "r", encoding='latin-1') as archivo:
+        lector = csv.DictReader(archivo, delimiter = delimitador)
+        datos = []
+        for fila in lector:
+            valor = float(fila[columna])
+            datos.append(valor)
+        if datos:
+            cantidad = len(datos)
+            promedio = sum(datos) / cantidad
+            datos_ordenados = sorted(datos)
+            if cantidad % 2 == 0:
+                mediana = (datos_ordenados[cantidad // 2 - 1] + datos_ordenados[cantidad // 2]) / 2
+            else:
+                mediana = datos_ordenados[cantidad // 2]
+            # se inicia uso de IA para el calculo de la desviación estandard    
+            diferencias_cuadradas = []
+            for valor in datos:
+                diferencia = valor - promedio
+                cuadrado = diferencia ** 2
+                diferencias_cuadradas.append(cuadrado)
+            suma_cuadrados = sum(diferencias_cuadradas)
+            if cantidad > 1:
+                desviacion = (suma_cuadrados / (cantidad - 1)) ** 0.5
+            else:
+                desviacion = 0
+            print(f"Cantidad de datos: {cantidad}")
+            print(f"Promedio: {promedio}")
+            print(f"Mediana: {mediana}")
+            print(f"Desviación estándar: {desviacion}")
+            print(f"Máximo: {max(datos)}")
+            print(f"Mínimo: {min(datos)}")
+        else:
+            print("No se encontraron datos numéricos en esa columna.")
+    
 
 def grafica():        
-    print()
+    nombre_archivo = input("Ingrese el nombre del archivo csv: ")
+    delimitador = input("¿Su archivo está delimitado por "","" ó "";""? Anote su respuesta: ")
+    columna = input("Ingrese el nombre de la columna a graficar: ")
+    ruta = "./src/Reto_unidad_5/Archivos_reto5/" + nombre_archivo
+    with open(ruta, "r", encoding='latin-1') as archivo:
+        lector = csv.DictReader(archivo, delimiter = delimitador)
+        datos = []
+        for fila in lector:
+            valor = fila[columna]
+            datos.append(float(valor))
+        if datos:
+            x = []
+            y = []
+            for i in range(len(datos)):
+                x.append(i)
+                y.append(datos[i])
+            plt.plot(x, y)
+            plt.title(f'Gráfico de la columna: {columna}')
+            plt.xlabel('Índice')
+            plt.ylabel(columna)
+            plt.show()    
+        else:
+            print("No se encontraron datos numéricos en esa columna.")            
+
 
 def OP1():
     print ("A continuación podrá observar los archivos que tiene disponible para trabajar:")
