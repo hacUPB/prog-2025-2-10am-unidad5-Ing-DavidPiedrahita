@@ -1,0 +1,24 @@
+# Solicitamos al usuario el nombre del archivo a crear
+nombre_archivo = "./src/archivos/"+input("Ingrese el nombre del archivo de texto: ")
+
+# Usamos 'with' para crear el contexto y escribir datos en el archivo 
+with open(nombre_archivo, 'w') as archivo:
+    # Solicitamos al usuario los datos a escribir en el archivo
+    while True:
+        dato = (input("Ingrese los datos que desea escribir en el archivo (lista:L numero:F, texto:S):\n "))
+        match dato:
+            case "L":
+                cant = int(input("ingrese la cantidad de datos de la lista:"))
+                lista = []
+                for i in range (cant):
+                    
+                    nombre_archivo.write()
+
+# Ahora usamos 'with' para crear el contexto donde leer los datos del archivo
+with open(nombre_archivo, 'r') as archivo:
+    contenido = archivo.read()
+    print("Contenido del archivo:")
+    print(contenido)
+
+#Modifica el código anterior y trata de escribir diferentes tipos de datos en el archivo.
+#Puedes verificar que los datos se hayan escrito usando el block de notas o con el mismo script de Python.    
