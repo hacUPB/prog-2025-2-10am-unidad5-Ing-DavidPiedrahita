@@ -56,9 +56,10 @@ def histograma():
 
 def vista_previa():
     nombre_archivo = input("Ingrese el nombre del archivo csv: ")
+    delimitador = input("¿Su archivo está delimitado por "","" ó "";""? Anote su respuesta: ")    
     ruta = "./src/Reto_unidad_5/Archivos_reto5/" + nombre_archivo
-    with open(ruta, "r", encoding='latin-1') as archivo:
-        lector = csv.reader(archivo)
+    with open(ruta, "r", encoding='latin-1') as archivo: #latin-1 es una decodificación propuesta por la IA, para solucionar problema de funcionamiento del código
+        lector = csv.reader(archivo, delimiter = delimitador)
         contador = 0
         for fila in lector:
             print(fila)
